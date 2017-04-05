@@ -10,6 +10,9 @@ module.exports = {
     },
     module: {
         loaders: [{
+            test: /\.html$/,
+            loader: 'raw-loader!html-minify-loader'
+        }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader?modules'
         }]
