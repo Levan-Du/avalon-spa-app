@@ -1,0 +1,72 @@
+input {
+    border: 0;
+    outline: none;
+}
+
+.l-login {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, .2);
+}
+
+.box {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 20rem;
+    height: 25rem;
+    background: #fff;
+}
+
+.row {
+    padding: 5px;
+    margin: 10px;
+    border: solid 1px #ccc;
+}
+
+.row > * {
+    vertical-align: middle;
+}
+
+.row.row-noborder {
+    padding: 0;
+    border: 0;
+}
+
+.iconfont {
+    padding: 0 5px;
+}
+
+.title {
+    height: 2rem;
+    background: #eee;
+}
+
+.title > * {
+    vertical-align: middle;
+}
+
+.title img {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 3px 10px;
+    border: solid 1px #ccc;
+    background: #fff;
+}
+
+.btn-submit {
+    width: 100%;
+    background: #2c2;
+    font-size: 1.1rem;
+    color: #fff;
+}

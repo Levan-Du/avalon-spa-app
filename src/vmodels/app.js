@@ -1,6 +1,8 @@
-import avalon, { define } from 'avalon2';
+import avalon, { vmodels, define } from 'avalon2';
 
 define({
     $id: 'app',
-    h1: 'Levan\'s APP'
+    onLoginSubmited: (e) => {
+        alert('app.onLoginSubmited');
+    }
 });

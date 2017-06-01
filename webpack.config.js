@@ -5,28 +5,38 @@ var webpack = require('webpack'),
 module.exports = {
     entry: path.join(__dirname, 'src/entry.js'),
     output: {
-        path: path.join(__dirname, 'build'),
+        path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
     },
     module: {
-        loaders: [{
+        rules: [{
+            test: /\.js$/,
+            use: 'babel-loader'
+        }, {
             test: /\.html$/,
-            loader: 'raw-loader!html-minify-loader'
+            use: ['html-withimg-loader']
         }, {
             test: /\.css$/,
-            loader: 'style-loader!css-loader?modules'
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.(png|jpg|svg|gif)$/,
+            use: 'url-loader?name=/images/[hash:6].[name].[ext]'
+        }, {
+            test: /\.(woff|ttf|svg|eot)$/,
+            include: [path.join(__dirname, 'src/assets/iconfont')],
+            use: 'url-loader?name=/iconfont/[hash:6].[name].[ext]'
         }]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'src/index.html'),
+            template: 'html-withimg-loader!' + path.join(__dirname, 'src/index.html'),
             filename: 'index.html',
-            inject: 'body'
+            inject: true
         })
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'build'),
+        contentBase: path.join(__dirname, 'dist'),
         inline: true,
-        port: 8080
+        port: 8010
     }
 }

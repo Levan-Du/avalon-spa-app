@@ -1,2 +1,2 @@
 import './components';
-import './vmodels'
+import './vmodels';
