@@ -1,7 +1,7 @@
 import avalon, { component } from 'avalon2';
 import './index.css';
 
-component('ms-topbar', {
+component('ms-page', {
     template: require('./index.html'),
     defaults: {
     }

@@ -1,0 +1,10 @@
+.menu {
+    width: 200px;
+    color: #ddd;
+}
+
+.menu__item {
+    padding: .5rem;
+    padding-left: 1rem;
+    border: solid 1px #345;
+}

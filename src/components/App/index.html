@@ -1,0 +1,17 @@
+<div class="container clearfix">
+    <ms-sidebar />
+    <ms-page>
+        <ms-topbar slot="topbar" />
+        <article class="main">
+            <ul class="tab">
+                <li class="tab-page" ms-for="p in pages">
+                    <input type="radio" name="page_tab" value="">
+                    <label>{{p.title}}</label>
+                    <article class="tab-content">
+                        {{p.content}}
+                    </article>
+                </li>
+            </ul>
+        </article>
+    </ms-page>
+</div>

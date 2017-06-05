@@ -6,7 +6,6 @@ import './index.css';
 component('ms-login', {
     template: require('./index.html'),
     defaults: {
-        name: 'Levan',
         onSubmit(e) {
             e.preventDefault();
             this.onSubmited();

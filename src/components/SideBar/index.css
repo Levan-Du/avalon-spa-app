@@ -1,0 +1,11 @@
+.sidebar {
+    float: left;
+    height: 100%;
+    background: #234567;
+}
+
+.sidebar__title {
+    padding: .5rem;
+    background: #123456;
+    color: #eee;
+}

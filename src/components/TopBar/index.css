@@ -1,7 +1,13 @@
-.container {
+.topbar {
     position: relative;
+    height: 4rem;
     margin: auto;
     text-align: center;
+    background: #f3f3f4;
+}
+
+.topbar img {
+    height: 80%;
 }
 
 .left {
