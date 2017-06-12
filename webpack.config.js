@@ -3,7 +3,7 @@ var webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, 'src/entry.js'),
+    entry: path.join(__dirname, 'src/index.js'),
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -22,12 +22,15 @@ module.exports = {
             test: /\.(png|jpg|svg|gif)$/,
             use: 'url-loader?name=/images/[hash:6].[name].[ext]'
         }, {
-            test: /\.(woff|ttf|svg|eot)$/,
-            include: [path.join(__dirname, 'src/assets/iconfont')],
+            test: /\.(woff|woff2|ttf|svg|eot)$/,
             use: 'url-loader?name=/iconfont/[hash:6].[name].[ext]'
         }]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        }),
         new HtmlWebpackPlugin({
             template: 'html-withimg-loader!' + path.join(__dirname, 'src/index.html'),
             filename: 'index.html',
