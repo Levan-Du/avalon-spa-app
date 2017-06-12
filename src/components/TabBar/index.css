@@ -1,0 +1,15 @@
+.tabbar {}
+
+.tabbar .left {
+    float: left;
+    width: 2rem;
+}
+
+.tabbar .right {
+    float: right;
+    width: 2rem;
+}
+
+.tabbar .mid {
+    overflow: hidden;
+}
