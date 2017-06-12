@@ -5,6 +5,7 @@ import './Main';
 import './App';
 import './Topbar';
 import './StatusBar';
-import './TabBar';
 import './Tab';
+import './TabTitle';
 import './TabPage';
+import './NavLink';

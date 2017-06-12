@@ -1,0 +1,8 @@
+.tab__page {
+    display: none;
+    height: 100%;
+}
+
+.tab__page.checked {
+    display: block;
+}

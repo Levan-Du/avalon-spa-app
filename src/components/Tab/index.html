@@ -1,11 +1,14 @@
-<ul class="tab clearfix">
-    <ms-tabpage>
-        <ms-page1 slot="page" />
-    </ms-tabpage>
-    <ms-tabpage>
-        <ms-page2 slot="page" />
-    </ms-tabpage>
-    <ms-tabpage>
-        <ms-page2 slot="page" />
-    </ms-tabpage>
-</ul>
+<div class="tab">
+    <ul class="tab__header">
+        <li class="left">111</li>
+        <li class="right">222</li>
+        <li class="mid">
+            <ul class="clearfix">
+                <ms-tabtitle ms-for="(i,p) in pages" ms-widget="{el:p,click:onTabTitleClick}" />
+            </ul>
+        </li>
+    </ul>
+    <ul class="tab__content">
+        <ms-tabpage ms-for="p in pages" ms-widget="{tmpl:p.tmpl,checked:p.checked}">
+    </ul>
+</div>

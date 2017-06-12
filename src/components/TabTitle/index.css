@@ -1,0 +1,22 @@
+.tab .tab__title {
+    float: left;
+    display: block;
+    border-right: solid 1px #ddd;
+}
+
+.tab__title__label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0 .8rem;
+}
+
+.tab a {
+    text-decoration: none;
+}
+
+.tab__title__label.checked {
+    background: #405060;
+    color: #fff;
+}
