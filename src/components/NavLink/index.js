@@ -5,6 +5,15 @@ component('ms-navlink', {
     template: require('./index.html'),
     defaults: {
         title: '',
-        to: ''
+        to: '',
+        parseHref() {
+            if (!this.to)
+                return '';
+            else if (this.to === '/') {
+                return '';
+            } else {
+                return '#' + this.to;
+            }
+        }
     }
 })

@@ -1,10 +1,26 @@
+.sidebar {
+    float: left;
+    width: 20rem;
+    height: 100%;
+    background: #203445;
+}
+
+.sidebar__header {
+    height: 12rem;
+    padding: .5rem;
+    background: #022334;
+    color: #eee;
+}
+
+.sidebar__nav {}
+
 .main {
     overflow: hidden;
     height: 100%;
     position: relative;
 }
 
-.top {
+.main .main__top {
     position: absolute;
     left: 0;
     right: 0;
@@ -14,7 +30,7 @@
     border-bottom: solid 1px #e7e7e7;
 }
 
-.content {
+.main .main__content {
     position: absolute;
     left: 0;
     right: 0;
@@ -25,7 +41,7 @@
     overflow: hidden;
 }
 
-.footer {
+.main .main__footer {
     position: absolute;
     left: 0;
     right: 0;

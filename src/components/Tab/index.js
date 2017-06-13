@@ -5,13 +5,11 @@ component('ms-tab', {
     template: require('./index.html'),
     defaults: {
         name: 'pagetab',
-        pages: [
-            { title: 'home', tmpl: '<ms-homepage slot="page" />', checked: true },
-            { title: 'page1', tmpl: '<ms-page1 slot="page" />', checked: false },
-            { title: 'page2', tmpl: '<ms-page2 slot="page" />', checked: false }
+        items: [
+            
         ],
         onTabTitleClick(checked) {
-            this.pages.forEach(el => el.checked = false);            
+            this.items.find(el => el.checked).checked = false;
         }
     }
 })

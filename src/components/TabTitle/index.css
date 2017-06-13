@@ -1,7 +1,11 @@
+.tab a {
+    text-decoration: none;
+}
+
 .tab .tab__title {
     float: left;
     display: block;
-    border-right: solid 1px #ddd;
+    border-right: solid 1px #e7e7e7;
 }
 
 .tab__title__label {
@@ -12,8 +16,8 @@
     padding: 0 .8rem;
 }
 
-.tab a {
-    text-decoration: none;
+.tab__title__label:hover {
+    background: #eee;
 }
 
 .tab__title__label.checked {

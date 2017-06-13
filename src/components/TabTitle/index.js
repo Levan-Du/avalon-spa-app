@@ -5,9 +5,7 @@ component('ms-tabtitle', {
     template: require('./index.html'),
     defaults: {
         el: {},
-        click() {
-
-        },
+        click() {},
         onClick() {
         	this.click();
             this.el.checked = true;

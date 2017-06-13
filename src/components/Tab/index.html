@@ -1,14 +1,18 @@
 <div class="tab">
     <ul class="tab__header">
-        <li class="left">111</li>
-        <li class="right">222</li>
+        <li class="left"><a class="link"><i class="glyphicon glyphicon-backward"></i></a></li>
+        <li class="right clearfix">
+            <a class="link"><i class="glyphicon glyphicon-forward"></i></a>
+            <a class="link"><i class="glyphicon glyphicon-remove-circle"></i></a>
+            <a class="link"><i class="glyphicon glyphicon-log-out"></i><span>退出</span></a>
+        </li>
         <li class="mid">
             <ul class="clearfix">
-                <ms-tabtitle ms-for="(i,p) in pages" ms-widget="{el:p,click:onTabTitleClick}" />
+                <ms-tabtitle ms-for="item in items" ms-widget="{el:item,click:onTabTitleClick}" />
             </ul>
         </li>
     </ul>
     <ul class="tab__content">
-        <ms-tabpage ms-for="p in pages" ms-widget="{tmpl:p.tmpl,checked:p.checked}">
+        <ms-tabpage ms-for="item in items" ms-widget="{tmpl:item.tmpl,checked:item.checked}">
     </ul>
 </div>

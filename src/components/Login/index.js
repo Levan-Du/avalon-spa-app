@@ -1,6 +1,5 @@
 import avalon, { component } from 'avalon2';
 import '../../assets/iconfont/iconfont.css';
-import '../../common/common.css';
 import './index.css';
 
 component('ms-login', {

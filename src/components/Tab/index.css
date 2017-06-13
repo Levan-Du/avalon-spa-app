@@ -17,14 +17,30 @@
     left: 0;
     right: 0;
     top: 0;
-    height: 3.15rem;
-    line-height: 3rem;
+    height: 3.5rem;
+    line-height: 3.4rem;
     border-bottom: solid .2rem #203040;
 }
 
 .tab__header .left {
     float: left;
-    border-right: solid 2px #ccc;
+    border-right: solid 1px #e7e7e7;
+}
+
+.tab__header .glyphicon {
+    padding: 0 .3rem;
+}
+
+.tab__header .link {
+    float: left;
+    height: 100%;
+    padding: 0 1rem;
+    border-right: solid 1px #e7e7e7;
+    color: #aaa;
+}
+
+.tab__header .link:hover {
+    background: #eee;
 }
 
 .tab__header .mid {
@@ -33,14 +49,14 @@
 
 .tab__header .right {
     float: right;
-    border-left: solid 2px #ccc;
+    border-left: solid 1px #e7e7e7;
 }
 
 .tab__content {
     position: absolute;
     left: 0;
     right: 0;
-    top: 3.2rem;
+    top: 3.5rem;
     bottom: 0;
     z-index: 101;
     overflow: auto;
