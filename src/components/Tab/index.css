@@ -18,7 +18,7 @@
     right: 0;
     top: 0;
     height: 3.5rem;
-    line-height: 3.4rem;
+    line-height: 3.3rem;
     border-bottom: solid .2rem #203040;
 }
 
@@ -32,11 +32,21 @@
 }
 
 .tab__header .link {
+    display: block;
     float: left;
     height: 100%;
     padding: 0 1rem;
     border-right: solid 1px #e7e7e7;
-    color: #aaa;
+    color: #999;
+    cursor: pointer;
+}
+
+.tab__header .dropdown-menu {
+    border-radius: 0;
+}
+
+.tab__header .link a {
+    color: #999;
 }
 
 .tab__header .link:hover {
@@ -50,6 +60,11 @@
 .tab__header .right {
     float: right;
     border-left: solid 1px #e7e7e7;
+}
+
+.tab__title__wrapper {
+    height: 100%;
+    width: 1000rem;
 }
 
 .tab__content {

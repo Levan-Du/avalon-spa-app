@@ -9,6 +9,9 @@ import './routes/router';
 import pages from './routes/pages';
 
 
+var menus = pages.filter(el => el.pid === 0),
+    submenus = pages.filter(el => el.pid !== 0);
+
 define({
     $id: 'app',
     tabItems: [{
@@ -34,27 +37,20 @@ define({
     }
 });
 
-var menus = pages.filter(el => el.pid === 0),
-    paths = pages.filter(el => el.pid !== 0);
-
 define({
     $id: 'vm_sidebar',
     menus,
-    paths,
-    getSubmenus(m) {
-        var sms = this.paths.filter(el => el.pid === m.id);
-        return sms;
-    }
+    submenus
 });
 
-(function(paths) {
+(function(submenus) {
     var app = avalon.vmodels['app'];
 
-    paths.forEach(el => {
+    submenus.forEach(el => {
         window.Router.route(el.path, () => {
             app.routeHandler(el);
         });
     });
-})(paths);
+})(submenus);
 
 window.Router.init();

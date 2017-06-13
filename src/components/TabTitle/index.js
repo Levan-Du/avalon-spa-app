@@ -4,11 +4,26 @@ import './index.css';
 component('ms-tabtitle', {
     template: require('./index.html'),
     defaults: {
-        el: {},
-        click() {},
-        onClick() {
-        	this.click();
-            this.el.checked = true;
+        item: {},
+        parseHref(path) {
+            if (!path)
+                return '';
+            else if (path === '/') {
+                return '';
+            } else {
+                return '#' + path;
+            }
+        },
+        ifIconVisible(path) {
+            if (!path || path === '/' || path === '/home') {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        click(e, item) {},
+        close(e, item) {
+
         }
     }
 })

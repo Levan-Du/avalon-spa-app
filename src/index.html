@@ -13,10 +13,7 @@
             <ms-logininfo />
         </header>
         <nav class="sidebar__nav">
-            <article ms-for="m in menus">
-                <h3><ms-navlink ms-widget="{to:m.path,title:m.title}" /></h3>
-                <ms-menu ms-widget="{menus:getSubmenus(m)}" />
-            </article>
+            <ms-menu ms-widget="{menus:menus,submenus:submenus}" />
         </nav>
     </aside>
     <article class="main">

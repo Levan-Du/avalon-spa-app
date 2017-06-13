@@ -4,16 +4,17 @@ import './index.css';
 component('ms-navlink', {
     template: require('./index.html'),
     defaults: {
-        title: '',
-        to: '',
-        parseHref() {
-            if (!this.to)
+        el:{},
+        glyphicon:'',
+        parseHref(path) {
+            if (!path)
                 return '';
-            else if (this.to === '/') {
+            else if (path === '/') {
                 return '';
             } else {
-                return '#' + this.to;
+                return '#' + path;
             }
-        }
+        },
+        iconvisible: false
     }
 })

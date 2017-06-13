@@ -3,12 +3,24 @@
         <li class="left"><a class="link"><i class="glyphicon glyphicon-backward"></i></a></li>
         <li class="right clearfix">
             <a class="link"><i class="glyphicon glyphicon-forward"></i></a>
-            <a class="link"><i class="glyphicon glyphicon-remove-circle"></i></a>
+            <div class="link dropdown">
+                <a class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    关闭操作
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu pull-right" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
             <a class="link"><i class="glyphicon glyphicon-log-out"></i><span>退出</span></a>
         </li>
         <li class="mid">
-            <ul class="clearfix">
-                <ms-tabtitle ms-for="item in items" ms-widget="{el:item,click:onTabTitleClick}" />
+            <ul class="tab__title__wrapper clearfix">
+                <ms-tabtitle ms-for="item in items" ms-widget="{item:item,click:onTabTitleClick,close:removeItem}" />
             </ul>
         </li>
     </ul>

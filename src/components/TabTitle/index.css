@@ -5,7 +5,7 @@
 .tab .tab__title {
     float: left;
     display: block;
-    border-right: solid 1px #e7e7e7;
+    border-right: solid 1px #eee;
 }
 
 .tab__title__label {
@@ -14,6 +14,12 @@
     height: 100%;
     margin: 0;
     padding: 0 .8rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.tab__title__label > * {
+    vertical-align: middle;
 }
 
 .tab__title__label:hover {
@@ -22,5 +28,13 @@
 
 .tab__title__label.checked {
     background: #405060;
-    color: #fff;
+    color: #ddd;
+}
+
+.tab__title__label .glyphicon {
+    display: none;
+}
+
+.tab__title__label.checked .glyphicon {
+    display: inline-block;
 }

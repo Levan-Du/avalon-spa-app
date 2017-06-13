@@ -1,1 +1,5 @@
-<a class="link" ms-attr="{href:parseHref()}" ms-text="@title"></a>
+<a class="nav-link clearfix" ms-attr="{href:parseHref(el.path)}">
+    <i class="glyphicon glyphicon-home" ms-visible="iconvisible"></i>
+    <i ms-class="['glyphicon',el.checked?'glyphicon-chevron-down':'glyphicon-chevron-left','right']" ms-visible="iconvisible"></i>
+    <span class="text" ms-text="el.title"></span>
+</a>

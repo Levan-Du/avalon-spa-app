@@ -1,3 +1,6 @@
 <li class="tab__title">
-    <a ms-class="['tab__title__label',el.checked&&'checked']" ms-text="el.title" ms-click="onClick"></a>
+    <a ms-attr="{href:parseHref(item.path)}" ms-class="['tab__title__label',item.checked&&'checked']" ms-click="click($event,item)">
+        <span class="text" ms-text="item.title"></span>
+        <i class="glyphicon glyphicon-remove-circle" ms-visible="ifIconVisible(item.path)" ms-click="close($event,item)"></i>
+    </a>
 </li>

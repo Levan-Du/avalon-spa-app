@@ -1,9 +1,42 @@
-.menu {
-    color: #ddd;
+.menu {}
+
+.menu__item.checked {
+    background: #2a3845;
 }
 
-.menu__item {
-    padding: .5rem;
-    padding-left: 1rem;
-    border: solid 1px #345;
+.menu__item.checked .nav-link {
+    color: #eef;
+}
+
+.menu__item .nav-link {
+    color: #aab;
+    padding: .5rem 2rem;
+}
+
+.menu__item > .menu__title .nav-link {
+    padding: .8rem 2rem;
+}
+
+.menu__item:hover {
+    background: #2a3845;
+    color: #eee;
+}
+
+.menu__item:hover .nav-link {
+    color: #eee;
+}
+
+.submenu {
+    color: #ddd;
+    padding-bottom: 1rem;
+    display: none;
+}
+
+.submenu.checked {
+    display: block;
+    background: #2a3845;
+}
+
+.submenu__item .nav-link {
+    padding-left: 4.5rem;
 }

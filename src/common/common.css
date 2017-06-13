@@ -14,14 +14,6 @@ select {
     outline: none;
 }
 
-.clearfix:after {
-    content: "";
-    display: block;
-    height: 0;
-    visibility: hidden;
-    clear: both;
-}
-
 .border-top {
     border-top: solid 1px #ccc;
 }
