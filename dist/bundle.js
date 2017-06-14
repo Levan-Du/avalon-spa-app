@@ -19236,12 +19236,12 @@ var createPage = function createPage(id, pid) {
         title: 'page' + id,
         path: '/page' + id,
         tmpl: '<ms-page' + id + ' slot="page" />',
-        checked: false,
+        checked: id === 1 ? true : false,
         pid: pid
     };
     return o;
 };
-[1, 2, 3, 4, 5, 6].forEach(function (i) {
+[1, 2, 3].forEach(function (i) {
     pages.push(createPage(i, 0));
     [1, 2, 3, 4, 5].forEach(function (j) {
         pages.push(createPage(i * 100 + j, i));
@@ -19271,6 +19271,11 @@ Router.prototype.refresh = function () {
 
     var cb = this.routes[this.currentUrl];
     cb && cb();
+};
+
+Router.prototype.redirect = function (path) {
+    location.hash = path;
+    console.log(path);
 };
 
 Router.prototype.init = function () {
@@ -23792,7 +23797,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _avalon.component)('ms-menu', {
     template: __webpack_require__(66),
     defaults: {
-        menus: []
+        menus: [],
+        submenus: [],
+        getSubmenus: function getSubmenus(id) {
+            var sms = this.submenus.filter(function (el) {
+                return el.pid === id;
+            });
+            return sms;
+        },
+        menuItemClick: function menuItemClick(el) {
+            var pre = this.menus.find(function (el) {
+                return el.checked;
+            });
+            pre.checked = false;
+            el.checked = true;
+        },
+        subMenuItemClick: function subMenuItemClick(el) {}
     }
 });
 
@@ -23814,15 +23834,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _avalon.component)('ms-navlink', {
     template: __webpack_require__(67),
     defaults: {
-        title: '',
-        to: '',
-        parseHref: function parseHref() {
-            if (!this.to) return '';else if (this.to === '/') {
+        el: {},
+        glyphicon: '',
+        parseHref: function parseHref(path) {
+            if (!path) return '';else if (path === '/') {
                 return '';
             } else {
-                return '#' + this.to;
+                return '#' + path;
             }
-        }
+        },
+
+        iconvisible: false
     }
 });
 
@@ -23887,12 +23909,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _avalon.component)('ms-tabtitle', {
     template: __webpack_require__(70),
     defaults: {
-        el: {},
-        click: function click() {},
-        onClick: function onClick() {
-            this.click();
-            this.el.checked = true;
-        }
+        item: {},
+        parseHref: function parseHref(path) {
+            if (!path) return '';else if (path === '/') {
+                return '';
+            } else {
+                return '#' + path;
+            }
+        },
+        ifIconVisible: function ifIconVisible(path) {
+            if (!path || path === '/' || path === '/home') {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        click: function click(e, item) {},
+        close: function close(e, item) {}
     }
 });
 
@@ -23916,10 +23949,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     defaults: {
         name: 'pagetab',
         items: [],
-        onTabTitleClick: function onTabTitleClick(checked) {
+        onTabTitleClick: function onTabTitleClick(e, item) {
             this.items.find(function (el) {
                 return el.checked;
             }).checked = false;
+            item.checked = true;
+        },
+        removeItem: function removeItem(e, item) {
+            console.log(item.$model);
+            var index = this.items.$model.findIndex(function (el) {
+                return el.id === item.id;
+            });
+            console.log(index);
+            this.items.removeAt(index);
         }
     }
 });
@@ -23975,7 +24017,13 @@ var _pages2 = _interopRequireDefault(_pages);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(_pages2.default);
+var menus = _pages2.default.filter(function (el) {
+    return el.pid === 0;
+}),
+    submenus = _pages2.default.filter(function (el) {
+    return el.pid !== 0;
+});
+
 (0, _avalon.define)({
     $id: 'app',
     tabItems: [{
@@ -23986,7 +24034,7 @@ console.log(_pages2.default);
         tmpl: '<ms-homepage slot="page" />',
         checked: true,
         pid: 10000
-    }].concat(_pages2.default),
+    }],
     routeHandler: function routeHandler(tabitem) {
         var item = this.tabItems.find(function (el) {
             return el.checked;
@@ -24005,34 +24053,21 @@ console.log(_pages2.default);
     }
 });
 
-var menus = _pages2.default.filter(function (el) {
-    return el.pid === 0;
-}),
-    paths = _pages2.default.filter(function (el) {
-    return el.pid !== 0;
-});
-
 (0, _avalon.define)({
     $id: 'vm_sidebar',
     menus: menus,
-    paths: paths,
-    getSubmenus: function getSubmenus(m) {
-        var sms = this.paths.filter(function (el) {
-            return el.pid === m.id;
-        });
-        return sms;
-    }
+    submenus: submenus
 });
 
-(function (paths) {
+(function (submenus) {
     var app = _avalon2.default.vmodels['app'];
 
-    paths.forEach(function (el) {
+    submenus.forEach(function (el) {
         window.Router.route(el.path, function () {
             app.routeHandler(el);
         });
     });
-})(paths);
+})(submenus);
 
 window.Router.init();
 
@@ -24145,7 +24180,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "html,\r\nbody {\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\ninput,\r\nselect {\r\n    outline: none;\r\n}\r\n\r\n.clearfix:after {\r\n    content: \"\";\r\n    display: block;\r\n    height: 0;\r\n    visibility: hidden;\r\n    clear: both;\r\n}\r\n\r\n.border-top {\r\n    border-top: solid 1px #ccc;\r\n}\r\n\r\n.border-right {\r\n    border-right: solid 1px #ccc;\r\n}\r\n\r\n.border-bottom {\r\n    border-bottom: solid 1px #ccc;\r\n}\r\n\r\n.border-left {\r\n    border-left: solid 1px #ccc;\r\n}\r\n\r\n.zindex10 {\r\n    z-index: 10;\r\n}\r\n\r\n.zindex100 {\r\n    z-index: 100;\r\n}\r\n\r\n.zindex1000 {\r\n    z-index: 1000;\r\n}\r\n\r\n.zindex10000 {\r\n    z-index: 10000;\r\n}\r\n\r\n.zindex100000 {\r\n    z-index: 100000;\r\n}\r\n\r\n.zindex1000000 {\r\n    z-index: 1000000;\r\n}\r\n\r\n.zindex10000000 {\r\n    z-index: 10000000;\r\n}\r\n", ""]);
+exports.push([module.i, "html,\r\nbody {\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\ninput,\r\nselect {\r\n    outline: none;\r\n}\r\n\r\n.border-top {\r\n    border-top: solid 1px #ccc;\r\n}\r\n\r\n.border-right {\r\n    border-right: solid 1px #ccc;\r\n}\r\n\r\n.border-bottom {\r\n    border-bottom: solid 1px #ccc;\r\n}\r\n\r\n.border-left {\r\n    border-left: solid 1px #ccc;\r\n}\r\n\r\n.zindex10 {\r\n    z-index: 10;\r\n}\r\n\r\n.zindex100 {\r\n    z-index: 100;\r\n}\r\n\r\n.zindex1000 {\r\n    z-index: 1000;\r\n}\r\n\r\n.zindex10000 {\r\n    z-index: 10000;\r\n}\r\n\r\n.zindex100000 {\r\n    z-index: 100000;\r\n}\r\n\r\n.zindex1000000 {\r\n    z-index: 1000000;\r\n}\r\n\r\n.zindex10000000 {\r\n    z-index: 10000000;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24187,7 +24222,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".menu {\r\n    color: #ddd;\r\n}\r\n\r\n.menu__item {\r\n    padding: 0 3rem;\r\n    \r\n}\r\n", ""]);
+exports.push([module.i, ".menu {}\r\n\r\n.menu__item.checked {\r\n    background: #2a3845;\r\n}\r\n\r\n.menu__item.checked .nav-link {\r\n    color: #eef;\r\n}\r\n\r\n.menu__item .nav-link {\r\n    color: #aab;\r\n    padding: .5rem 2rem;\r\n}\r\n\r\n.menu__item > .menu__title .nav-link {\r\n    padding: .8rem 2rem;\r\n}\r\n\r\n.menu__item:hover {\r\n    background: #2a3845;\r\n    color: #eee;\r\n}\r\n\r\n.menu__item:hover .nav-link {\r\n    color: #eee;\r\n}\r\n\r\n.submenu {\r\n    color: #ddd;\r\n    padding-bottom: 1rem;\r\n    display: none;\r\n}\r\n\r\n.submenu.checked {\r\n    display: block;\r\n    background: #2a3845;\r\n}\r\n\r\n.submenu__item .nav-link {\r\n    padding-left: 4.5rem;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24201,7 +24236,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".link {\r\n    color: #ddd;\r\n}\r\n", ""]);
+exports.push([module.i, ".nav-link {\r\n    display: block;\r\n    color: #aab;\r\n    padding: .4rem;\r\n}\r\n\r\n.nav-link:hover {\r\n    color: #fff;\r\n}\r\n\r\n.nav-link > * {\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n    height: 100%;\r\n    height: 2rem;\r\n    line-height: 2rem;\r\n}\r\n\r\n.nav-link .text {\r\n    font-size: 15px;\r\n    font-weight: 900;\r\n    overflow: hidden;\r\n}\r\n\r\n.nav-link .glyphicon {\r\n    float: left;\r\n    margin-right: 1rem;\r\n    font-size: 12px;\r\n    font-weight: 100;\r\n}\r\n\r\n.nav-link .glyphicon.right {\r\n    float: right;\r\n    margin-left: 1rem;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24215,7 +24250,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".statusbar {\r\n    width: 100%;\r\n    height: 100%;\r\n    border-top: solid 1px #ddd;\r\n}\r\n", ""]);
+exports.push([module.i, ".statusbar {\r\n    width: 100%;\r\n    height: 100%;\r\n    border-top: solid 1px #ddd;\r\n    text-align: right;\r\n}\r\n\r\n.statusbar .produceby {\r\n    padding: 1rem;\r\n    vertical-align: bottom;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24243,7 +24278,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".tab a {\r\n    text-decoration: none;\r\n}\r\n\r\n.tab .tab__title {\r\n    float: left;\r\n    display: block;\r\n    border-right: solid 1px #e7e7e7;\r\n}\r\n\r\n.tab__title__label {\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0 .8rem;\r\n    cursor: pointer;\r\n}\r\n\r\n.tab__title__label > * {\r\n    vertical-align: middle;\r\n}\r\n\r\n.tab__title__label:hover {\r\n    background: #eee;\r\n}\r\n\r\n.tab__title__label.checked {\r\n    background: #405060;\r\n    color: #fff;\r\n}\r\n\r\n.tab__title__label .glyphicon {\r\n    display: none;\r\n}\r\n\r\n.tab__title__label.checked .glyphicon {\r\n    display: inline-block;\r\n}\r\n", ""]);
+exports.push([module.i, ".tab a {\r\n    text-decoration: none;\r\n}\r\n\r\n.tab .tab__title {\r\n    float: left;\r\n    display: block;\r\n    border-right: solid 1px #eee;\r\n}\r\n\r\n.tab__title__label {\r\n    display: block;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: 0;\r\n    padding: 0 .8rem;\r\n    cursor: pointer;\r\n    color: #888;\r\n}\r\n\r\n.tab__title__label > * {\r\n    vertical-align: middle;\r\n}\r\n\r\n.tab__title__label:hover {\r\n    background: #eee;\r\n}\r\n\r\n.tab__title__label.checked {\r\n    background: #405060;\r\n    color: #ddd;\r\n}\r\n\r\n.tab__title__label .glyphicon {\r\n    display: none;\r\n}\r\n\r\n.tab__title__label.checked .glyphicon {\r\n    display: inline-block;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24257,7 +24292,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".tab {\r\n    width: 100%;\r\n    height: 100%;\r\n    list-style: none;\r\n    position: relative;\r\n}\r\n\r\n.tab ul,\r\n.tab li {\r\n    list-style: none;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.tab__header {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    height: 3.5rem;\r\n    line-height: 3.3rem;\r\n    border-bottom: solid .2rem #203040;\r\n}\r\n\r\n.tab__header .left {\r\n    float: left;\r\n    border-right: solid 1px #e7e7e7;\r\n}\r\n\r\n.tab__header .glyphicon {\r\n    padding: 0 .3rem;\r\n}\r\n\r\n.tab__header .link {\r\n    display: block;\r\n    float: left;\r\n    height: 100%;\r\n    padding: 0 1rem;\r\n    border-right: solid 1px #e7e7e7;\r\n    color: #aaa;\r\n}\r\n\r\n.tab__header .link:hover {\r\n    background: #eee;\r\n}\r\n\r\n.tab__header .mid {\r\n    overflow: hidden;\r\n}\r\n\r\n.tab__header .right {\r\n    float: right;\r\n    border-left: solid 1px #e7e7e7;\r\n}\r\n.tab__title__wrapper{\r\n    height: 100%;\r\n    width: 1000rem;\r\n}\r\n\r\n.tab__content {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 3.5rem;\r\n    bottom: 0;\r\n    z-index: 101;\r\n    overflow: auto;\r\n}\r\n", ""]);
+exports.push([module.i, ".tab {\r\n    width: 100%;\r\n    height: 100%;\r\n    list-style: none;\r\n    position: relative;\r\n}\r\n\r\n.tab ul,\r\n.tab li {\r\n    list-style: none;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\n.tab__header {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    height: 3.5rem;\r\n    line-height: 3.3rem;\r\n    border-bottom: solid .2rem #203040;\r\n}\r\n\r\n.tab__header .left {\r\n    float: left;\r\n    border-right: solid 1px #e7e7e7;\r\n}\r\n\r\n.tab__header .glyphicon {\r\n    padding: 0 .3rem;\r\n}\r\n\r\n.tab__header .link {\r\n    display: block;\r\n    float: left;\r\n    height: 100%;\r\n    padding: 0 1rem;\r\n    border-right: solid 1px #e7e7e7;\r\n    color: #999;\r\n    cursor: pointer;\r\n}\r\n\r\n.tab__header .dropdown-menu {\r\n    border-radius: 0;\r\n}\r\n\r\n.tab__header .link a {\r\n    color: #999;\r\n}\r\n\r\n.tab__header .link:hover {\r\n    background: #eee;\r\n}\r\n\r\n.tab__header .mid {\r\n    overflow: hidden;\r\n}\r\n\r\n.tab__header .right {\r\n    float: right;\r\n    border-left: solid 1px #e7e7e7;\r\n}\r\n\r\n.tab__title__wrapper {\r\n    height: 100%;\r\n    width: 1000rem;\r\n}\r\n\r\n.tab__content {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 3.5rem;\r\n    bottom: 0;\r\n    z-index: 101;\r\n    overflow: auto;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24285,7 +24320,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".sidebar {\r\n    float: left;\r\n    width: 19rem;\r\n    height: 100%;\r\n    background: #2f4050;\r\n    position: relative;\r\n}\r\n\r\n.sidebar__header {\r\n    height: 13rem;\r\n    background: #2a3845;\r\n    color: #eee;\r\n}\r\n\r\n.sidebar__nav {\r\n    position: absolute;\r\n    top: 12rem;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    overflow: auto;\r\n}\r\n\r\n.main {\r\n    overflow: hidden;\r\n    height: 100%;\r\n    position: relative;\r\n}\r\n\r\n.main .main__top {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    height: 5rem;\r\n    background: #f2f3f5;\r\n    border-bottom: solid 1px #e7e7e7;\r\n}\r\n\r\n.main .main__content {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 5rem;\r\n    bottom: 3.5rem;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.main .main__footer {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 3.5rem;\r\n}\r\n", ""]);
+exports.push([module.i, ".sidebar {\r\n    float: left;\r\n    width: 19rem;\r\n    height: 100%;\r\n    background: #2f4050;\r\n    position: relative;\r\n    color: #aaa;\r\n}\r\n\r\n.sidebar ul {\r\n    list-style: none;\r\n    margin: 0;\r\n}\r\n\r\n.sidebar__header {\r\n    height: 13rem;\r\n    background: #2a3845;\r\n}\r\n\r\n.sidebar__nav {\r\n    position: absolute;\r\n    top: 13rem;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    overflow: auto;\r\n    padding-top: 1rem;\r\n}\r\n\r\n.main {\r\n    overflow: hidden;\r\n    height: 100%;\r\n    position: relative;\r\n}\r\n\r\n.main .main__top {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    height: 5rem;\r\n    background: #f2f3f5;\r\n    border-bottom: solid 1px #e7e7e7;\r\n}\r\n\r\n.main .main__content {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 5rem;\r\n    bottom: 3.5rem;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.main .main__footer {\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    height: 3.5rem;\r\n    line-height: 3.5rem;\r\n}\r\n", ""]);
 
 // exports
 
@@ -24348,19 +24383,19 @@ module.exports = "<div class=\"l-login\">\r    <form ms-on-submit=\"@onSubmit\">
 /* 66 */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"menu\">\r    <li class=\"menu__item\" ms-for=\"el in menus\">\r    \t<ms-navlink ms-widget=\"{to:el.path,title:el.title}\" />\r    </li>\r</ul>\r"
+module.exports = "<ul class=\"menu\">\r    <li ms-for=\"m in menus\" ms-class=\"['menu__item',m.checked&&'checked']\">\r        <div class=\"menu__title\">\r            <ms-navlink ms-widget=\"{el:m,glyphicon:'glyphicon-home',iconvisible:true}\" ms-click=\"menuItemClick(m)\" />\r        </div>\r        <ul ms-class=\"['submenu',m.checked&&'checked']\">\r            <li class=\"submenu__item\" ms-for=\"sm in getSubmenus(m.id)\">\r                <ms-navlink ms-widget=\"{el:sm,glyphicon:'glyphicon-home'}\" />\r            </li>\r        </ul>\r    </li>\r</ul>\r"
 
 /***/ }),
 /* 67 */
 /***/ (function(module, exports) {
 
-module.exports = "<a class=\"link\" ms-attr=\"{href:parseHref()}\">\r\t<span ms-text=\"title\"></span>\r</a>\r"
+module.exports = "<a class=\"nav-link clearfix\" ms-attr=\"{href:parseHref(el.path)}\">\r    <i class=\"glyphicon glyphicon-home\" ms-visible=\"iconvisible\"></i>\r    <i ms-class=\"['glyphicon',el.checked?'glyphicon-chevron-down':'glyphicon-chevron-left','right']\" ms-visible=\"iconvisible\"></i>\r    <span class=\"text\" ms-text=\"el.title\"></span>\r</a>\r"
 
 /***/ }),
 /* 68 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"statusbar\">\r\tthis is footer\r</div>"
+module.exports = "<div class=\"statusbar\">\r    <span class=\"produceby\">produce by levan@2017</span>\r</div>\r"
 
 /***/ }),
 /* 69 */
@@ -24372,13 +24407,13 @@ module.exports = "<li ms-class=\"['tab__page',checked&&'checked']\" ms-html=\"tm
 /* 70 */
 /***/ (function(module, exports) {
 
-module.exports = "<li class=\"tab__title\">\r    <a ms-class=\"['tab__title__label',el.checked&&'checked']\" ms-click=\"onClick\">\r        <span class=\"text\" ms-text=\"el.title\"></span>\r        <i class=\"glyphicon glyphicon-remove-circle\"></i>\r    </a>\r</li>\r"
+module.exports = "<li class=\"tab__title\">\r    <a ms-attr=\"{href:parseHref(item.path)}\" ms-class=\"['tab__title__label',item.checked&&'checked']\" ms-click=\"click($event,item)\">\r        <span class=\"text\" ms-text=\"item.title\"></span>\r        <i class=\"glyphicon glyphicon-remove-circle\" ms-visible=\"ifIconVisible(item.path)\" ms-click=\"close($event,item)\"></i>\r    </a>\r</li>\r"
 
 /***/ }),
 /* 71 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tab\">\r    <ul class=\"tab__header\">\r        <li class=\"left\"><a class=\"link\"><i class=\"glyphicon glyphicon-backward\"></i></a></li>\r        <li class=\"right clearfix\">\r            <a class=\"link\"><i class=\"glyphicon glyphicon-forward\"></i></a>\r            <a class=\"link\">\r                <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\r                    <li><a href=\"#\">Action</a></li>\r                    <li><a href=\"#\">Another action</a></li>\r                    <li><a href=\"#\">Something else here</a></li>\r                    <li role=\"separator\" class=\"divider\"></li>\r                    <li><a href=\"#\">Separated link</a></li>\r                </ul>\r            </a>\r            <a class=\"link\"><i class=\"glyphicon glyphicon-log-out\"></i><span>退出</span></a>\r        </li>\r        <li class=\"mid\">\r            <ul class=\"tab__title__wrapper clearfix\">\r                <ms-tabtitle ms-for=\"item in items\" ms-widget=\"{el:item,click:onTabTitleClick}\" />\r            </ul>\r        </li>\r    </ul>\r    <ul class=\"tab__content\">\r        <ms-tabpage ms-for=\"item in items\" ms-widget=\"{tmpl:item.tmpl,checked:item.checked}\">\r    </ul>\r</div>\r"
+module.exports = "<div class=\"tab\">\r    <ul class=\"tab__header\">\r        <li class=\"left\"><a class=\"link\"><i class=\"glyphicon glyphicon-backward\"></i></a></li>\r        <li class=\"right clearfix\">\r            <a class=\"link\"><i class=\"glyphicon glyphicon-forward\"></i></a>\r            <div class=\"link dropdown\">\r                <a class=\"dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r                    关闭操作\r                    <span class=\"caret\"></span>\r                </a>\r                <ul class=\"dropdown-menu pull-right\" aria-labelledby=\"dropdownMenu1\">\r                    <li><a href=\"#\">Action</a></li>\r                    <li><a href=\"#\">Another action</a></li>\r                    <li><a href=\"#\">Something else here</a></li>\r                    <li role=\"separator\" class=\"divider\"></li>\r                    <li><a href=\"#\">Separated link</a></li>\r                </ul>\r            </div>\r            <a class=\"link\"><i class=\"glyphicon glyphicon-log-out\"></i><span>退出</span></a>\r        </li>\r        <li class=\"mid\">\r            <ul class=\"tab__title__wrapper clearfix\">\r                <ms-tabtitle ms-for=\"item in items\" ms-widget=\"{item:item,click:onTabTitleClick,close:removeItem}\" />\r            </ul>\r        </li>\r    </ul>\r    <ul class=\"tab__content\">\r        <ms-tabpage ms-for=\"item in items\" ms-widget=\"{tmpl:item.tmpl,checked:item.checked}\">\r    </ul>\r</div>\r"
 
 /***/ }),
 /* 72 */

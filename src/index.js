@@ -34,6 +34,12 @@ define({
         } else {
             currItem.checked = true;
         }
+    },
+    removeTabItem(e, item) {
+        var i = this.tabItems.findIndex(el => el.id === item.id);
+        console.log('before remove');
+        this.tabItems.removeAt(i);
+        console.log('after remove');
     }
 });
 

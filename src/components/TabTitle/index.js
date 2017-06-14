@@ -22,8 +22,11 @@ component('ms-tabtitle', {
             }
         },
         click(e, item) {},
-        close(e, item) {
-
+        closeTab(e, item) {
+            console.log(item);
+        },
+        onReady(){
+            
         }
     }
 })

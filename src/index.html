@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="wdith=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>avalon spa demo</title>
 </head>
 
@@ -13,7 +13,7 @@
             <ms-logininfo />
         </header>
         <nav class="sidebar__nav">
-            <ms-menu ms-widget="{menus:menus,submenus:submenus}" />
+            <ms-menu ms-widget="{menus:menus,submenus:submenus,removeItem:removeTabItem}" />
         </nav>
     </aside>
     <article class="main">
@@ -21,7 +21,7 @@
             <ms-topbar />
         </header>
         <article class="main__content">
-            <ms-tab ms-widget="{items:tabItems}" />
+            <ms-tab ms-widget="{items:tabItems,removeItem:removeTabItem}" />
         </article>
         <footer class="main__footer">
             <ms-statusbar />
