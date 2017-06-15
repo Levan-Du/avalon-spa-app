@@ -1,6 +1,7 @@
 var webpack = require('webpack'),
     path = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+    HtmlWebpackPlugin = require('html-webpack-plugin'),
+    TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src/index.js'),
@@ -35,7 +36,10 @@ module.exports = {
             template: 'html-withimg-loader!' + path.join(__dirname, 'src/index.html'),
             filename: 'index.html',
             inject: true
-        })
+        }),
+        new TransferWebpackPlugin([
+            { from: 'common/polyfill', to: 'js' }
+        ], path.join(__dirname, 'src'))
     ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),

@@ -2,8 +2,6 @@ export var parseCssModule = (styles, tmpl) => {
     var div = document.createElement('div');
     div.innerHTML = tmpl;
 
-    console.log(styles);
-
     var eles = div.getElementsByTagName('*');
     for (var l = eles.length; l--;) {
         var ele = eles[l],

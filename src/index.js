@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import './common/common.css';
 import './index.css';
+import './common/hack';
 import './components';
 import './pages';
 import avalon, { define } from 'avalon2';
@@ -23,23 +24,34 @@ define({
         checked: true,
         pid: 10000
     }],
-    routeHandler(tabitem) {
-        var item = this.tabItems.find(el => el.checked);
-        if (item) item.checked = false;
+    routeHandler(tabitem, index) {
+        // console.log(this.tabItems,tabitem,index);
 
-        var currItem = this.tabItems.find(el => el.id === tabitem.id);
-        if (!currItem) {
+        var preindex = this.tabItems.findIndex(el => el.checked);
+        if (preindex >= 0) {
+            this.tabItems[preindex].checked = false;
+        }
+
+        var currIndex = this.tabItems.findIndex(el => el.id === tabitem.id);
+        if (currIndex < 0) {
             tabitem.checked = true;
             this.tabItems.push(tabitem);
         } else {
-            currItem.checked = true;
+            if (this.tabItems[currIndex]) {
+                this.tabItems[currIndex].checked = true;
+            }
         }
     },
     removeTabItem(e, item) {
+        e.preventDefault();
+
         var i = this.tabItems.findIndex(el => el.id === item.id);
-        console.log('before remove');
         this.tabItems.removeAt(i);
-        console.log('after remove');
+        var path = this.tabItems[i-1].path;
+        window.Router.redirect(path);
+    },
+    hashclick(e) {
+        location.hash = '/home';
     }
 });
 
@@ -52,9 +64,9 @@ define({
 (function(submenus) {
     var app = avalon.vmodels['app'];
 
-    submenus.forEach(el => {
+    submenus.forEach((el, i) => {
         window.Router.route(el.path, () => {
-            app.routeHandler(el);
+            app.routeHandler(el, i);
         });
     });
 })(submenus);

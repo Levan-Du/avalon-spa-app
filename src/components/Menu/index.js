@@ -10,10 +10,10 @@ component('ms-menu', {
             var sms = this.submenus.filter(el => el.pid === id);
             return sms;
         },
-        menuItemClick(el) {
-            var pre = this.menus.find(el => el.checked);
-            pre.checked = false;
-            el.checked = true;
+        menuItemClick(el, i) {
+            var preIndex = this.menus.findIndex(el => el.checked);
+            this.menus[preIndex].checked = false;
+            this.menus[i].checked = true;
         },
         subMenuItemClick(el) {
 

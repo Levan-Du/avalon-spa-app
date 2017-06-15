@@ -1,4 +1,12 @@
-var pages = [];
+var pages = [{
+        id: 10000,
+        name: 'home',
+        title: '首页',
+        path: '/home',
+        tmpl: '<ms-homepage slot="page" />',
+        checked: true,
+        pid: -1
+    }];
 var createPage = (id, pid) => {
     var o = {
         id,
@@ -17,5 +25,6 @@ var createPage = (id, pid) => {
         pages.push(createPage(i * 100 + j, i));
     })
 });
+
 
 export default pages;

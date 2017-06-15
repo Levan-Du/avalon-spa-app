@@ -1,7 +1,7 @@
 import avalon, { component } from 'avalon2';
 import './index.css';
 
-component('ms-tab', {
+component('ms-pagetab', {
     template: require('./index.html'),
     defaults: {
         name: 'pagetab',
@@ -15,8 +15,8 @@ component('ms-tab', {
         removeItem(e, item) {
 
         },
-        onReady(){
-            
+        onReady() {
+            console.log(this.removeItem);
         }
     }
 })

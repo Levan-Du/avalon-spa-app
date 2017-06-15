@@ -5,6 +5,8 @@ component('ms-tabtitle', {
     template: require('./index.html'),
     defaults: {
         item: {},
+        click(e, item) {},
+        closeTab(e, item) {},
         parseHref(path) {
             if (!path)
                 return '';
@@ -21,12 +23,8 @@ component('ms-tabtitle', {
                 return true;
             }
         },
-        click(e, item) {},
-        closeTab(e, item) {
-            console.log(item);
-        },
-        onReady(){
-            
+        onReady() {
+
         }
     }
 })

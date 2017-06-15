@@ -1,7 +1,7 @@
 <ul class="menu">
-    <li ms-for="m in menus" ms-class="['menu__item',m.checked&&'checked']">
+    <li ms-for="(i,m) in menus" ms-class="['menu__item',m.checked&&'checked']">
         <div class="menu__title">
-            <ms-navlink ms-widget="{el:m,glyphicon:'glyphicon-home',iconvisible:true}" ms-click="menuItemClick(m)" />
+            <ms-navlink ms-widget="{el:m,glyphicon:'glyphicon-home',iconvisible:true}" ms-click="menuItemClick(m,i)" />
         </div>
         <ul ms-class="['submenu',m.checked&&'checked']">
             <li class="submenu__item" ms-for="sm in getSubmenus(m.id)">

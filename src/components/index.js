@@ -1,9 +1,10 @@
+
 import './Login';
 import './Menu';
 import './Topbar';
 import './StatusBar';
-import './Tab';
-import './TabTitle';
-import './TabPage';
+import './PageTab';
+import './PageTabTitle';
+import './PageTabPage';
 import './NavLink';
 import './LoginInfo';

@@ -9,14 +9,12 @@ Router.prototype.route = function(path, callback) {
 
 Router.prototype.refresh = function() {
     this.currentUrl = location.hash.slice(1) || '/';
-
     var cb = this.routes[this.currentUrl];
     cb && cb();
 };
 
 Router.prototype.redirect = function(path) {
     location.hash = path;
-    console.log(path);
 };
 
 Router.prototype.init = function() {
