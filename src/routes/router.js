@@ -22,4 +22,4 @@ Router.prototype.init = function() {
     window.addEventListener('hashchange', this.refresh.bind(this), false);
 }
 
-window.Router = new Router();
+export default new Router();

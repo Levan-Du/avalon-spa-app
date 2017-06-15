@@ -1,11 +1,12 @@
 import avalon, { component } from 'avalon2';
 import './index.css';
+import { menus, submenus } from '../../routes/pages';
 
 component('ms-menu', {
     template: require('./index.html'),
     defaults: {
-        menus: [],
-        submenus: [],
+        menus,
+        submenus,
         getSubmenus(id) {
             var sms = this.submenus.filter(el => el.pid === id);
             return sms;

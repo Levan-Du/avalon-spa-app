@@ -14,7 +14,7 @@ select {
     outline: none;
 }
 
-.border-top {
+/*.border-top {
     border-top: solid 1px #ccc;
 }
 
@@ -28,32 +28,4 @@ select {
 
 .border-left {
     border-left: solid 1px #ccc;
-}
-
-.zindex10 {
-    z-index: 10;
-}
-
-.zindex100 {
-    z-index: 100;
-}
-
-.zindex1000 {
-    z-index: 1000;
-}
-
-.zindex10000 {
-    z-index: 10000;
-}
-
-.zindex100000 {
-    z-index: 100000;
-}
-
-.zindex1000000 {
-    z-index: 1000000;
-}
-
-.zindex10000000 {
-    z-index: 10000000;
-}
+}*/
