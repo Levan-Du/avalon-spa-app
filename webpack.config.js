@@ -13,7 +13,7 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             use: 'babel-loader'
-        }, {
+        },  {
             test: /\.html$/,
             use: ['html-withimg-loader']
         }, {
@@ -38,7 +38,7 @@ module.exports = {
             inject: true
         }),
         new TransferWebpackPlugin([
-            { from: 'common/polyfill', to: 'js' }
+            { from: 'common/hack', to: 'js' }
         ], path.join(__dirname, 'src'))
     ],
     devServer: {
