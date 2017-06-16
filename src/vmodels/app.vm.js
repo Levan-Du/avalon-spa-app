@@ -4,18 +4,8 @@ import Router from '../routes/router';
 
 define({
     $id: 'app',
-    tabItems: [{
-        id: 10000,
-        name: 'home',
-        title: '首页',
-        path: '/home',
-        tmpl: '<ms-homepage slot="page" />',
-        checked: true,
-        pid: 10000
-    }],
+    tabItems: [],
     routeHandler(tabitem, index) {
-        // console.log(this.tabItems,tabitem,index);
-
         var preindex = this.tabItems.findIndex(el => el.checked);
         if (preindex >= 0) {
             this.tabItems[preindex].checked = false;
@@ -38,8 +28,5 @@ define({
         this.tabItems.removeAt(i);
         var path = this.tabItems[i - 1].path;
         Router.redirect(path);
-    },
-    hashclick(e) {
-        location.hash = '/home';
     }
 });
