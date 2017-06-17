@@ -1,3 +1,3 @@
 import './Home';
-import './Page1';
-import './Page2';
+import './Page101';
+import './Page201';

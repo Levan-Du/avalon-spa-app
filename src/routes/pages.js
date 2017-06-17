@@ -12,8 +12,6 @@ var createPage = (id, pid, page) => {
     return o;
 };
 
-pages.push(createPage(10000, -1, 'homepage'));
-console.log(pages);
 
 [1, 2, 3].forEach(i => {
     pages.push(createPage(i, 0, 'page' + i));

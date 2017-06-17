@@ -8,6 +8,10 @@
     color: #fff;
 }
 
+.nav-link:checked {
+    color: #eee;
+}
+
 .nav-link > * {
     display: inline-block;
     vertical-align: middle;

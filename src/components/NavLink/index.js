@@ -4,8 +4,8 @@ import './index.css';
 component('ms-navlink', {
     template: require('./index.html'),
     defaults: {
-        el:{},
-        glyphicon:'',
+        item: {},
+        glyphicon: '',
         parseHref(path) {
             if (!path)
                 return '';
@@ -15,6 +15,9 @@ component('ms-navlink', {
                 return '#' + path;
             }
         },
-        iconvisible: false
+        iconvisible: false,
+        click(e, el) {
+
+        }
     }
 })

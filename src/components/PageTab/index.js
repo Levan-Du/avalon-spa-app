@@ -16,7 +16,7 @@ component('ms-pagetab', {
 
         },
         onReady() {
-            console.log(this.removeItem);
+            
         }
     }
 })

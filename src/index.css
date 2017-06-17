@@ -19,6 +19,7 @@ body > .container-full {
 
 .sidebar__header {
     height: 13rem;
+    line-height: 13rem;
     background: #2a3845;
 }
 

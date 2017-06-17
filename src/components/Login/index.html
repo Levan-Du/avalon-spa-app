@@ -1,8 +1,8 @@
 <div class="l-login">
-    <form ms-on-submit="@onSubmit">
-        <article class="box">
-            <h3 class="title"><img src="../../assets/imgs/logoicon.png"><span>登录</span></h3>
-            <section class="content">
+    <article class="box">
+        <h3 class="title"><img src="../../assets/imgs/logoicon.png"><span>登录</span></h3>
+        <section class="content">
+            <form ms-on-submit="@onSubmit">
                 <p class="row">
                     <span class="iconfont icon-ren"></span>
                     <input type="text" name="account" placeholder="用户名/邮箱/手机号码">
@@ -18,9 +18,9 @@
                 <p class="row row-noborder">
                     <input class="btn btn-submit" type="submit" name="submit" value="提交">
                 </p>
-            </section>
-            <section class="footer">
-            </section>
-        </article>
-    </form>
+            </form>
+        </section>
+        <section class="footer">
+        </section>
+    </article>
 </div>

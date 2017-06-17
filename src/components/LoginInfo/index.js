@@ -5,6 +5,9 @@ import './index.css';
 component('ms-logininfo', {
     template: require('./index.html'),
     defaults: {
-        account: {}
+        id: 0,
+        name: '怡红公子',
+        role: '管理员',
+        avator: require('./boy.png')
     }
 });

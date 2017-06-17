@@ -4,13 +4,17 @@
     background: #2a3845;
 }
 
-.menu__item.checked .nav-link {
+.menu__item.checked > .menu__title .nav-link {
     color: #eef;
 }
 
 .menu__item .nav-link {
     color: #aab;
     padding: .5rem 2rem;
+}
+
+.menu__item .nav-link.checked {
+    color: #eee;
 }
 
 .menu__item > .menu__title .nav-link {
@@ -23,7 +27,7 @@
 }
 
 .menu__item:hover .nav-link {
-    color: #eee;
+    /*color: #eee;*/
 }
 
 .submenu {

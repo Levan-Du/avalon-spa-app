@@ -1,11 +1,11 @@
 <ul class="menu">
     <li ms-for="(i,m) in menus" ms-class="['menu__item',m.checked&&'checked']">
         <div class="menu__title">
-            <ms-navlink ms-widget="{el:m,glyphicon:'glyphicon-home',iconvisible:true}" ms-click="menuItemClick(m,i)" />
+            <ms-navlink ms-widget="{item:m,glyphicon:'glyphicon-home',iconvisible:true,click:menuItemClick}" />
         </div>
         <ul ms-class="['submenu',m.checked&&'checked']">
-            <li class="submenu__item" ms-for="sm in getSubmenus(m.id)">
-                <ms-navlink ms-widget="{el:sm,glyphicon:'glyphicon-home'}" />
+            <li class="submenu__item" ms-for="sm in submenuArr[m.id]">
+                <ms-navlink ms-widget="{item:sm,glyphicon:'glyphicon-home',click:subMenuItemClick}" />
             </li>
         </ul>
     </li>
