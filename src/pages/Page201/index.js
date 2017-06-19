@@ -6,5 +6,10 @@ import { parseCssModule } from '../../common/common';
 
 component('ms-page201', {
     template: require('./index.html'),
-    defaults: {}
+    defaults: {
+        shown: false,
+        onInit(e){
+        	console.log(this.shown);
+        }
+    }
 })

@@ -1,18 +1,18 @@
-.tab {
+.pagetab {
     width: 100%;
     height: 100%;
     list-style: none;
     position: relative;
 }
 
-.tab ul,
-.tab li {
+.pagetab ul,
+.pagetab li {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.tab__header {
+.pagetab__header {
     position: absolute;
     left: 0;
     right: 0;
@@ -22,16 +22,16 @@
     border-bottom: solid .2rem #203040;
 }
 
-.tab__header .left {
+.pagetab__header .left {
     float: left;
     border-right: solid 1px #e7e7e7;
 }
 
-.tab__header .glyphicon {
+.pagetab__header .glyphicon {
     padding: 0 .3rem;
 }
 
-.tab__header .link {
+.pagetab__header .link {
     display: block;
     float: left;
     height: 100%;
@@ -41,33 +41,39 @@
     cursor: pointer;
 }
 
-.tab__header .dropdown-menu {
+.pagetab__header .dropdown-menu {
     border-radius: 0;
 }
 
-.tab__header .link a {
+.pagetab__header .link a {
     color: #999;
 }
 
-.tab__header .link:hover {
+.pagetab__header .link:hover {
     background: #eee;
 }
 
-.tab__header .mid {
+.pagetab__header .mid {
     overflow: hidden;
 }
 
-.tab__header .right {
+.pagetab__header .right {
     float: right;
     border-left: solid 1px #e7e7e7;
 }
 
-.tab__title__wrapper {
+.pagetab__title__wrapper {
     height: 100%;
     width: 1000rem;
 }
 
-.tab__content {
+.pagetab__title {
+    float: left;
+    display: block;
+    border-right: solid 1px #eee;
+}
+
+.pagetab__content {
     position: absolute;
     left: 0;
     right: 0;

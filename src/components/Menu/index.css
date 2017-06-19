@@ -1,33 +1,30 @@
 .menu {}
 
-.menu__item.checked {
-    background: #2a3845;
-}
-
-.menu__item.checked > .menu__title .nav-link {
-    color: #eef;
-}
-
-.menu__item .nav-link {
-    color: #aab;
-    padding: .5rem 2rem;
-}
-
-.menu__item .nav-link.checked {
-    color: #eee;
-}
-
-.menu__item > .menu__title .nav-link {
-    padding: .8rem 2rem;
-}
-
 .menu__item:hover {
     background: #2a3845;
     color: #eee;
 }
 
+.menu__item.checked {
+    background: #2a3845;
+}
+
+.menu__item .nav-link {
+    color: #aab;
+}
+
 .menu__item:hover .nav-link {
     /*color: #eee;*/
+}
+
+.menu__item > .menu__title .nav-link {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 1rem 2rem;
+}
+
+.menu__item.checked > .menu__title .nav-link {
+    color: #eee;
 }
 
 .submenu {
@@ -43,4 +40,6 @@
 
 .submenu__item .nav-link {
     padding-left: 4.5rem;
+    font-weight: 300;
+    font-size: 14px;
 }

@@ -4,7 +4,7 @@ import { parseCssModule } from '../../common/common';
 
 // console.log(parseCssModule(styles, require('./index.html'));
 
-component('ms-homepage', {
+component('ms-home', {
     template: require('./index.html'),
     defaults: {}
 })

@@ -18,7 +18,9 @@ component('ms-menu', {
         menuItemClick(e, item) {
             var preIndex = this.menus.findIndex(el => el.checked);
             var currIndex = this.menus.findIndex(el => item.id === el.id);
-            this.menus[preIndex].checked = false;
+            if (preIndex >= 0) {
+                this.menus[preIndex].checked = false;
+            }
             this.menus[currIndex].checked = true;
         },
         subMenuItemClick(e, item) {

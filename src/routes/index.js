@@ -1,2 +1,4 @@
+import './HashRouter';
+import './Route';
+import './NavLink';
 import './router';
-import './route.config';

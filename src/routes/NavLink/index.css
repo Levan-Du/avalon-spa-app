@@ -1,0 +1,12 @@
+.nav-link {
+    color: #aab;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #eee;
+}
+
+.nav-link.checked {
+    color: #fff;
+}
