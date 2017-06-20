@@ -4,6 +4,6 @@ import './common/common.css';
 import './index.css';
 import './common/hack';
 import './components';
+import './routes';
 import './pages';
 import './vmodels';
-import './routes';

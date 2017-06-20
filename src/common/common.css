@@ -4,28 +4,7 @@ body {
     height: 100%;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-}
-
 input,
 select {
     outline: none;
 }
-
-/*.border-top {
-    border-top: solid 1px #ccc;
-}
-
-.border-right {
-    border-right: solid 1px #ccc;
-}
-
-.border-bottom {
-    border-bottom: solid 1px #ccc;
-}
-
-.border-left {
-    border-left: solid 1px #ccc;
-}*/
