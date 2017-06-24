@@ -12,8 +12,8 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            use: 'babel-loader'
-        },  {
+            use: ['es3ify-loader', 'babel-loader']
+        }, {
             test: /\.html$/,
             use: ['html-withimg-loader']
         }, {
@@ -44,6 +44,6 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         inline: true,
-        port: 8010
+        port: 8030
     }
 }

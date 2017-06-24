@@ -1,4 +1,4 @@
-import createPage from './createPage';
+import createPage from '../services/createPage';
 
 var pages = [];
 

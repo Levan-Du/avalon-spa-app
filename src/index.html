@@ -10,29 +10,32 @@
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="js/hack.js?6666"></script>
 </head>
 
 <body>
     <div class="container-full clearfix" ms-controller="app">
-        <aside class="sidebar" ms-controller="vm_sidebar">
-            <header class="sidebar__header">
-                <ms-logininfo />
-            </header>
-            <nav class="sidebar__nav">
-                <ms-menu ms-widget="{menus:menus,submenus:submenus,removeItem:removeTabItem}" />
-            </nav>
-        </aside>
-        <article class="main">
-            <header class="main__top">
-                <ms-topbar />
-            </header>
-            <article class="main__content">
-                <ms-pagetab />
+        <ms-hashrouter>
+            <aside class="sidebar">
+                <header class="sidebar__header">
+                    <ms-logininfo />
+                </header>
+                <nav class="sidebar__nav">
+                    <ms-menu />
+                </nav>
+            </aside>
+            <article class="main">
+                <header class="main__top">
+                    <ms-topbar />
+                </header>
+                <article class="main__content">
+                    <ms-pagetab />
+                </article>
+                <footer class="main__footer">
+                    <ms-statusbar />
+                </footer>
             </article>
-            <footer class="main__footer">
-                <ms-statusbar />
-            </footer>
-        </article>
+        </ms-hashrouter>
     </div>
 </body>
 

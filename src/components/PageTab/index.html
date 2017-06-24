@@ -22,17 +22,15 @@
         </li>
         <li class="mid">
             <ul class="pagetab__title__wrapper clearfix" ms-css="{marginLeft:tabTitleWrapperMarginLeft}">
-                <li class="pagetab__title">
-                    <ms-navlink ms-widget="{to:'/page101'}">page101</ms-navlink>
-                </li>
-                <li class="pagetab__title">
-                    <ms-navlink ms-widget="{to:'/page201'}">page201</ms-navlink>
+                <li ms-for="item in items" class="pagetab__title">
+                    <ms-navlink ms-widget="{to:item.path+(item.query?'?'+item.query:''),class:item.checked ? 'checked' : '',click:onTabTitleClick,iconClick:removeItem,iconVisible:item.id!==0}">
+                        <span ms-text="item.title"></span>
+                    </ms-navlink>
                 </li>
             </ul>
         </li>
     </ul>
     <div class="pagetab__content">
-        <ms-route ms-widget="{path:'/page101',component:'<ms-page101 ms-widget={shown:shown} />'}" />
-        <ms-route ms-widget="{path:'/page201',component:'<ms-page201 ms-widget={shown:shown />'}" />
+        <ms-page />
     </div>
 </div>

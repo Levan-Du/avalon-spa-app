@@ -1,12 +1,13 @@
-.nav-link {
-    color: #aab;
-    font-weight: 500;
-}
-
-.nav-link:hover {
-    color: #eee;
-}
-
 .nav-link.checked {
+    background: #203040;
     color: #fff;
+}
+
+.nav-link .glyphicon {
+    display: none;
+    font-size: 12px;
+}
+
+.nav-link.checked .glyphicon {
+    display: inline-block;
 }

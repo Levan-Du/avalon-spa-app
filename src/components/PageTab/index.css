@@ -18,7 +18,7 @@
     right: 0;
     top: 0;
     height: 3.5rem;
-    line-height: 3.3rem;
+    line-height: 3.4rem;
     border-bottom: solid .2rem #203040;
 }
 
@@ -45,8 +45,9 @@
     border-radius: 0;
 }
 
-.pagetab__header .link a {
+.pagetab__header a {
     color: #999;
+    text-decoration: none;
 }
 
 .pagetab__header .link:hover {
@@ -71,6 +72,20 @@
     float: left;
     display: block;
     border-right: solid 1px #eee;
+}
+
+.pagetab__title .nav-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 .6rem;
+    text-decoration: none;
+    color: #999;
+}
+
+.pagetab__title.checked .nav-link {
+    background: #203040;
+    color:#eee;
 }
 
 .pagetab__content {

@@ -9,18 +9,42 @@
     background: #2a3845;
 }
 
-.menu__item .nav-link {
+.menu .nav-link {
+    display: block;
     color: #aab;
+    text-decoration: none;
 }
 
-.menu__item:hover .nav-link {
-    /*color: #eee;*/
+.menu .nav-link:hover {
+    color: #eee;
 }
 
 .menu__item > .menu__title .nav-link {
     font-size: 16px;
     font-weight: 600;
     padding: 1rem 2rem;
+}
+
+.menu__item > .menu__title .nav-link .glyphicon.left {
+    float: left;
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    margin-right: 1rem;
+}
+
+.menu__item > .menu__title .nav-link .glyphicon.right {
+    float: right;
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.menu__item > .menu__title .nav-link .text {
+    display: block;
+    overflow: hidden;
+    height: 1.5rem;
+    line-height: 1.5rem;
 }
 
 .menu__item.checked > .menu__title .nav-link {
@@ -39,7 +63,12 @@
 }
 
 .submenu__item .nav-link {
+    padding: .5rem;
     padding-left: 4.5rem;
     font-weight: 300;
     font-size: 14px;
+}
+
+.submenu__item.checked .nav-link {
+    color: #fff;
 }

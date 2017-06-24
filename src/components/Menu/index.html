@@ -1,21 +1,17 @@
 <ul class="menu">
-    <li class="menu__item checked">
+    <li ms-for="m in menus" ms-class="['menu__item',m.checked&&'checked']">
         <div class="menu__title">
-            <a class="nav-link">11111</a>
+            <a class="nav-link clearfix" data-id="m.id" ms-click="menuItemClick($event,m)">
+                <i class="glyphicon glyphicon-home left"></i>
+                <i class="glyphicon right" ms-class="[m.checked?'glyphicon-menu-down':'glyphicon-menu-right']"></i>
+                <span class="text">{{m.title}}</span>
+            </a>
         </div>
-        <ul class="submenu checked">
-            <li class="submenu__item">
-                <ms-navlink ms-widget="{to:'/page101'}">page101</ms-navlink>
-            </li>
-        </ul>
-    </li>
-    <li class="menu__item checked">
-        <div class="menu__title">
-            <a class="nav-link">22222</a>
-        </div>
-        <ul class="submenu checked">
-            <li class="submenu__item">
-                <ms-navlink ms-widget="{to:'/page201'}">page201</ms-navlink>
+        <ul ms-class="['submenu',m.checked&&'checked']">
+            <li ms-for="sm in submenuArr[m.id]" ms-class="['submenu__item',sm.checked&&'checked']">
+                <ms-navlink ms-widget="{to:sm.path,click:subMenuItemClick,data:sm}">
+                    {{sm.title}}
+                </ms-navlink>
             </li>
         </ul>
     </li>
