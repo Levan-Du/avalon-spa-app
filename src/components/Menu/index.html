@@ -7,7 +7,7 @@
                 <span class="text">{{m.title}}</span>
             </a>
         </div>
-        <ul ms-class="['submenu',m.checked&&'checked']">
+        <ul ms-class="['submenu',m.checked&&'checked']" ms-effect="{is:'slide',action:m.aniAction}">
             <li ms-for="sm in submenuArr[m.id]" ms-class="['submenu__item',sm.checked&&'checked']">
                 <ms-navlink ms-widget="{to:sm.path,click:subMenuItemClick,data:sm}">
                     {{sm.title}}

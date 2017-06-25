@@ -54,11 +54,11 @@
 .submenu {
     color: #ddd;
     padding-bottom: 1rem;
-    display: none;
+    /*display: none;*/
 }
 
 .submenu.checked {
-    display: block;
+    /*display: block;*/
     background: #2a3845;
 }
 

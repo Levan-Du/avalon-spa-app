@@ -85,26 +85,3 @@ component('ms-route', {
         onDispose(e) {}
     }
 })
-
-
-avalon.effect('fade', {
-    enter: function(el, done) {
-        $(el).fadeIn('fast', done);
-    },
-    leave: function(el, done) {
-        // $(el).fadeOut('fast', done);
-        $(el).hide();
-    }
-});
-
-avalon.effect('zoomIn', {
-    enter: function(el, done) {
-        $(el).show();
-        $(el).animate({ width: '100%', height: '100%' }, 300, 'swing', () => {
-            console.log();
-        });
-    },
-    leave: function(el, done) {
-        $(el).hide();
-    }
-});
