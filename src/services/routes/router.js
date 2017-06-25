@@ -66,7 +66,7 @@ class Router {
 
         var oo = {};
         for (var i in result) {
-            var ss = result[i].split('=');
+            var ss = result[i].toString().split('=');
             oo[ss[0].replace('&', '')] = ss[1];
         }
         return oo;

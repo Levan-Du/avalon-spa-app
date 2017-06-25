@@ -13,7 +13,7 @@ avalon.effect('fade', {
 avalon.effect('slide', {
     enter: function(el, done) {
         $(el).show();
-        var _height = $(el).children().length * 32;
+        var _height = $(el).children().length * 32 + 10;
         $(el).animate({ height: _height + 'px' }, 200, 'swing', done);
     },
     leave: function(el, done) {

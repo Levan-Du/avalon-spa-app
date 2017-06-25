@@ -23,7 +23,7 @@
         <li class="mid">
             <ul class="pagetab__title__wrapper clearfix" ms-css="{marginLeft:tabTitleWrapperMarginLeft}">
                 <li ms-for="item in items" class="pagetab__title">
-                    <ms-navlink ms-widget="{to:item.path+(item.query?'?'+item.query:''),class:item.checked ? 'checked' : '',click:onTabTitleClick,iconClick:removeItem,iconVisible:item.id!==0}">
+                    <ms-navlink ms-widget="{to:item.path+(item.query?'?'+item.query:''),class:item.checked ? 'checked' : '',click:onTabTitleClick,iconClick:removeItem,iconVisible:item.id!==0,style:getItemStyle(item)}">
                         <span ms-text="item.title"></span>
                     </ms-navlink>
                 </li>

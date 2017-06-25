@@ -17,7 +17,12 @@ component('ms-pagetab', {
             this.items[preIndex].checked = false;
             this.items[currIndex].checked = true;
         },
-
+        getItemStyle(item) {
+            if (item.id === 0) {
+                return { padding: '0 1.5rem' }
+            }
+            return {};
+        },
         removeItem(e) {
             e.preventDefault();
             e.stopPropagation();

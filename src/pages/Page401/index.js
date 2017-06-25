@@ -4,7 +4,7 @@ import { parseCssModule } from '../../services/parseCssModule';
 
 // console.log(parseCssModule(styles, require('./index.html'));
 
-component('ms-page201', {
+component('ms-page401', {
     template: require('./index.html'),
     defaults: {
         query: {},

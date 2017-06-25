@@ -5,13 +5,13 @@ import './index.css';
 
 component('ms-navlink', {
     template: `
-        <a ms-class="['nav-link',@class]" ms-attr="{href:getHref(to)}" ms-click="onClick">
+        <a ms-class="['nav-link',@class]" ms-attr="{href:getHref(to)}" ms-click="onClick" ms-css="style">
             <span><slot /></span>
             <i ms-visible="iconVisible" class="glyphicon glyphicon-remove-circle" ms-click="onIconClick"></i> 
         </a>
         `,
     defaults: {
-        styles: {},
+        style: {},
         class: '',
         to: '',
         label: '',

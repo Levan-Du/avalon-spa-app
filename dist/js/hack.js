@@ -106,12 +106,22 @@ if (!Array.prototype.indexOf) {
     }
 }
 
+
+if (!Function.prototype.bind) {
+    Function.prototype.bind = function(thisValue) {
+        var _this = this;
+        return function() {
+            _this.call(thisValue, arguments);
+        }
+    }
+}
+
+
 ! function() {
-    var DONT_ENUM = "propertyIsEnumerable,isPrototypeOf,hasOwnProperty,toLocaleString,toString,valueOf,constructor".split(","),
-        hasOwn = ({}).hasOwnProperty;
-    for (var i in {
-            toString: 1
-        }) {
+    var objT = { toString: 1 },
+        DONT_ENUM = "propertyIsEnumerable,isPrototypeOf,hasOwnProperty,toLocaleString,toString,valueOf,constructor".split(","),
+        hasOwn = (objT).hasOwnProperty;
+    for (var i in objT) {
         DONT_ENUM = false;
     }
 
@@ -133,13 +143,3 @@ if (!Array.prototype.indexOf) {
     };
 }();
 
-
-
-if (!Function.prototype.bind) {
-    Function.prototype.bind = function(thisValue) {
-        var _this = this;
-        return function() {
-            _this.call(thisValue, arguments);
-        }
-    }
-}
