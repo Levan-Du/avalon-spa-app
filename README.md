@@ -6,4 +6,4 @@
 
 3.npm start
 
-4.打开浏览器 http://localhost:8010
+4.打开浏览器 http://localhost:8030
